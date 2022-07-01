@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Moofy_project/Scenes/Menu/Main_menu.unity
-    guid: 44131c1f8d33fe64087e15966a192481
+    path: Assets/Moofy_project/Scenes/Menu/Main_menu_V2.unity
+    guid: 6ac86a65ac3e7924e989841d9a16430c
   - enabled: 1
     path: Assets/Moofy_project/Scenes/Maps/Level/Level_01.unity
     guid: 2cda990e2423bbf4892e6590ba056729
