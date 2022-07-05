@@ -16,6 +16,7 @@ public class MovingPlateforme : MonoBehaviour
     void Start()
     {
         nextPos = startPos.position;
+        
     }
 
     // Update is called once per frame
@@ -31,6 +32,7 @@ public class MovingPlateforme : MonoBehaviour
         }
 
         transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
+
     }
     
     private void OnDrawGizmos() {
