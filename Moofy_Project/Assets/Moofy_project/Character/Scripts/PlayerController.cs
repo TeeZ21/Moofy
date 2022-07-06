@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
+    public ProjectileBehaviour projectilePrefab;
+    public Transform launchOffset;
+
     void Start()
     {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
@@ -46,6 +49,11 @@ public class PlayerController : MonoBehaviour
        moveVertical = Input.GetAxisRaw("Vertical");
 
        Flip();
+
+       if(Input.GetKeyDown(KeyCode.L))
+       {
+            Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
+       }
 
     }
 
