@@ -10,15 +10,15 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed;
     private float jumpForce;
     private bool isJumping;
+    public bool doubleJump;
     private float moveHorizontal;
     private float moveVertical;
-    private bool isFacingRight = true;
-    
-    private bool canDash = true;
+    private bool isFacingRight;
+    private bool canDash;
     private bool isDashing;
-    private float dashingPower = 24f;
-    private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
+    private float dashingPower;
+    private float dashingTime;
+    private float dashingCooldown;
 
     public ProjectileBehaviour projectilePrefab;
     public Transform launchOffset;
@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
         jumpForce = 40f;
         isJumping = false;
         canDash = true;
+        dashingPower = 24f;
+        dashingTime = 0.2f;
+        dashingCooldown = 1f;
+        isFacingRight = true;
     }
 
     void Update()
@@ -81,9 +85,15 @@ public class PlayerController : MonoBehaviour
             rb2D.AddForce(new Vector2(moveHorizontal * moveSpeed, 0f), ForceMode2D.Impulse);
         }
         
-        if(!isJumping && moveVertical > 0.1f)
+        if(!isJumping && moveVertical > 0.1f && !doubleJump)
         {
             rb2D.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
+            doubleJump = !doubleJump;
+        }
+
+        if(!isJumping && !Input.GetButton("Vertical"))
+        {
+            doubleJump = false;
         }
     }
 
@@ -96,7 +106,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D collision) 
     {
-        isJumping = true;    
+        isJumping = true;
     }
 
     private IEnumerator Dash()
@@ -115,3 +125,4 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 }
+
