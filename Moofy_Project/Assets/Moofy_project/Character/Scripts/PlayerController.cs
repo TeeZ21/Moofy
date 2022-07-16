@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 2f;
         jumpForce = 40f;
         isJumping = false;
+        doubleJump = false;
         canDash = true;
         dashingPower = 24f;
         dashingTime = 0.2f;
@@ -85,14 +86,15 @@ public class PlayerController : MonoBehaviour
             rb2D.AddForce(new Vector2(moveHorizontal * moveSpeed, 0f), ForceMode2D.Impulse);
         }
         
-        if(!isJumping && moveVertical > 0.1f && !doubleJump)
+        if(!isJumping && moveVertical > 0.1f)
         {
             rb2D.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
-            doubleJump = !doubleJump;
         }
 
-        if(!isJumping && !Input.GetButton("Vertical"))
+        if(!isJumping && !doubleJump)
         {
+            rb2D.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
+            isJumping = false;
             doubleJump = false;
         }
     }
